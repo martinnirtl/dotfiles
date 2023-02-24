@@ -1,6 +1,6 @@
 # Dotfiles
 
-Run the following command to initialize the system using this repository based on `chezmoi`. No git-cloning required, just run the command:
+Run the following command to initialize the macOS system using this repository based on `chezmoi`. No git-cloning required, just run the command:
 
 ```sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/martinnirtl/dotfiles/main/init.sh)"
