@@ -1,0 +1,21 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+DYNAMIC_PROFILES_DIR=$HOME/.config/iterm2/AppSupport/DynamicProfiles
+PROFILES_SHA={{ include "dot_config/private_chezmoi-helper/iterm2_dynamic-profiles.json.tmpl" | sha256sum }} # not used, but required for triggering script exec
+
+echo "💠 Checking for iterm2 dynamic profiles dir..."
+if [ -d "$DYNAMIC_PROFILES_DIR" ];
+then
+	echo "✅   Found. Writing dynamic profiles to $DYNAMIC_PROFILES_DIR..."
+  cp .config/chezmoi-helper/iterm2_dynamic-profiles.json $DYNAMIC_PROFILES_DIR/chezmoi_profiles.json
+else
+  echo "🔻   Not found. Please install iterm2 and manually run the following command:"
+  echo "🔻     cp .config/chezmoi-helper_iterm2_dynamic-profiles.json $DYNAMIC_PROFILES_DIR/chezmoi_profiles.json"
+fi
+
+echo
+echo "⏩ Configure preferences to be loaded from {{ .chezmoi.sourceDir }}/iterm2 (see Settings > General > Preferences)"
+echo "⏩ Set default profile in iterm2 (see Settings > Profiles)"
+
+{{ end -}}

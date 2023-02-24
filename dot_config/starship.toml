@@ -1,0 +1,7 @@
+right_format = """$kubernetes"""
+
+[golang]
+symbol = 'GO '
+
+[kubernetes]
+disabled = false
