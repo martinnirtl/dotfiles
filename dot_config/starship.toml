@@ -5,5 +5,5 @@ symbol = 'GO '
 
 [kubernetes]
 disabled = false
-format = '[$symbol ($user@)$cluster]($style) in [$context \($namespace\)]($style)'
+format = '[$symbol ($user@)$cluster]($style) ctx [$context( \($namespace\))]($style)'
 style = 'cyan'
