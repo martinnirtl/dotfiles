@@ -3,6 +3,5 @@ backlog
 Brewfile
 Brewfile_old
 init.sh
-kubectl-plugins_tmp.txt
 kubectl-plugins.txt
 README.md
