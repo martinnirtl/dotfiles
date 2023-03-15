@@ -1,13 +1,13 @@
 #!/bin/bash
 
-DEV_HOME=$HOME/Development
+HOME_DEV=$HOME/Development
 
 echo "💠 Creating Development folder under $HOME..."
-if [ -d "$DEV_HOME" ];
+if [ -d "$HOME_DEV" ];
 then
 	echo "✅   Directory already exists."
 else
-  mkdir $DEV_HOME
+  mkdir $HOME_DEV
 fi
 
 echo "💠 Checking for prerequisites..."
@@ -38,5 +38,5 @@ else
 fi
 
 echo "💠 Initializing and applying chezmoi over SSH..."
-# chezmoi init martinnirtl/dotfiles --apply --source $DEV_HOME/chezmoi --ssh # wait for https://github.com/twpayne/chezmoi/issues/2771
+# chezmoi init martinnirtl/dotfiles --apply --source $HOME_DEV/chezmoi --ssh # wait for https://github.com/twpayne/chezmoi/issues/2771
 chezmoi init martinnirtl/dotfiles --apply --ssh
