@@ -2,13 +2,14 @@
 
 DEV=$HOME/Development
 DEV_TOOLS=$DEV/tools
+DEV_TOOLS_BIN=$DEV/tools/bin
 
 echo "💠 Creating Development (and tools) folder under $HOME..."
-if [ -d "$DEV_TOOLS" ];
+if [ -d "$DEV_TOOLS_BIN" ];
 then
 	echo "✅   Directory already exists."
 else
-  mkdir -p $DEV_TOOLS
+  mkdir -p $DEV_TOOLS_BIN
 fi
 
 echo "💠 Checking for prerequisites..."

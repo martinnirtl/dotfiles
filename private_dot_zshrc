@@ -3,6 +3,7 @@
 # CUSTOM ENVVARS
 export DEV=$HOME/Development
 export DEV_TOOLS=$DEV/tools
+export DEV_TOOLS_BIN=$DEV/tools/bin
 export BAT_THEME="Monokai Extended" # run `bat --list-themes` to get preview on themes
 #export DOCKER_HOST="unix://$HOMEe/.local/share/containers/podman/machine/podman-machine-default/podman.sock"
 #export FZF_BASE="$HOMEBREW_PREFIX/bin/fzf"
@@ -13,8 +14,7 @@ export ZSH_COMPLETIONS_CACHE="$HOME/.oh-my-zsh/cache/completions"
 # PATH EXTENSIONS
 GOBINS="$GOPATH/bin"
 KREW="$HOME/.krew/bin"
-UTILS="$DEV_TOOLS/utils"
-export PATH="$PATH:$GOBINS:$KREW:$UTILS"
+export PATH="$PATH:$GOBINS:$KREW:$DEV_TOOLS_BIN"
 
 # ZSH SETTINGS
 export ZSH="$HOME/.oh-my-zsh"
