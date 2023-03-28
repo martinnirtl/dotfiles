@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+echo "💠 Installing Mirantis Launchpad..."
+wget https://github.com/Mirantis/launchpad/releases/latest/download/launchpad-darwin-arm64 -O {{ joinPath .chezmoi.homeDir .devToolsRelativePath }}/bin/launchpad
+chmod +x {{ joinPath .chezmoi.homeDir .devToolsRelativePath }}/bin/launchpad
+echo "✅   Launchpad installed."
+
+{{ end -}}
+
