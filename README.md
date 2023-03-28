@@ -7,3 +7,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/martinnirtl/dotfiles/main/
 ```
 
 The final instruction of initialization script will run `chezmoi apply` to apply everything else defined within this repo.
+
+## TODOs
+
+- add go installs
+- split script or add checks for after-sync script
