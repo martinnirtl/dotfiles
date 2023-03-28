@@ -17,6 +17,11 @@ rm AWSCLIV2.pkg
 
 echo "💠   Logs written to /var/log/install.log"
 
+echo "💠 Installing Rust... (see https://www.rust-lang.org/tools/install)"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+echo "💠   Uninstall with `rustup self uninstall`." 
+
 echo
 echo "⏩ Configure dynamic profiles folder to be loaded from $HOME/.config/iterm2/DynamicProfiles (see Settings > Advanced > Section General > Path to folder with dynamic profiles)"
 echo "⏩ Set default profile in iterm2 (see Settings > Profiles)"
