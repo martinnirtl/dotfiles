@@ -1,0 +1,34 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+echo
+echo "░█▀█░█░█░█▀▀░░░█▀▀░█░░░▀█▀"
+echo "░█▀█░█▄█░▀▀█░░░█░░░█░░░░█░"
+echo "░▀░▀░▀░▀░▀▀▀░░░▀▀▀░▀▀▀░▀▀▀"
+echo
+
+echo "Checking for aws CLI..."
+if command -v aws &> /dev/null; then
+  echo "AWS CLI already installed."
+  exit 0
+else
+  echo "AWS CLI not found..."
+fi
+
+echo "Installing AWS CLI... (see https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)"
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o AWSCLIV2.pkg
+
+sudo installer -pkg AWSCLIV2.pkg \
+            -target {{ joinPath .chezmoi.homeDir .devToolsRelativePath }} \
+            -applyChoiceChangesXML {{ joinPath .chezmoi.homeDir ".config" }}/aws.xml
+
+echo "Linking bins..."
+sudo ln -s {{ joinPath .chezmoi.homeDir .devToolsRelativePath }}/aws-cli/aws /usr/local/bin/aws
+sudo ln -s {{ joinPath .chezmoi.homeDir .devToolsRelativePath }}/aws-cli/aws_completer /usr/local/bin/aws_completer
+
+echo "Cleaning up..."
+rm AWSCLIV2.pkg
+
+echo "Logs written to /var/log/install.log"
+
+{{ end -}}
