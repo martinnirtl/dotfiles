@@ -1,25 +1,25 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
-echo "💠 Checking for Brew command..."
+echo "Checking for Brew command..."
 if ! command -v brew &> /dev/null
 then
-  echo "🔻   Brew not installed. Did you run `init.sh` script? Exiting..."
+  echo "Brew not installed. Did you run `init.sh` script? Exiting..."
   exit 1
 else
-  echo "✅   Brew is installed. Attempting update..."
+  echo "Brew is installed. Attempting update..."
   brew update
 fi
 
 # file hash: {{ include "Brewfile" | sha256sum }}
-echo "💠 Installing Brew formulas from Brewfile..."
+echo "Installing Brew formulas from Brewfile..."
 brew bundle --no-lock --file={{ joinPath .chezmoi.sourceDir "Brewfile" | quote }}
 
 # Krew can be installed before kubernetes-cli/kubectl, which gets installed during `brew bundle`
-echo "💠 Installing Krew..."
+echo "Installing Krew..."
 if [ -d "$HOME/.krew" ]; # checking the default install dir
 then
-	echo "✅   Krew found under $HOME/.krew. Attempting update..."
+	echo "Krew found under $HOME/.krew. Attempting update..."
   kubectl-krew upgrade
 else
   (
@@ -33,19 +33,19 @@ else
   )
 fi
 
-echo "💠 Installing kubectl plugins via Krew..."
+echo "Installing kubectl plugins via Krew..."
 kubectl-krew install < {{ joinPath .chezmoi.sourceDir "kubectl-plugins.txt" | quote }}
 
-echo "💠 Installing OH-MY-ZSH..."
+echo "Installing OH-MY-ZSH..."
 if [ -d "$ZSH" ];
 then
-	echo "✅   OH-MY-ZSH is installed under $ZSH. Attempting upgrade..."
+	echo "OH-MY-ZSH is installed under $ZSH. Attempting upgrade..."
   upgrade_oh_my_zsh
 else
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-echo "💠 Git-cloning OH-MY-ZSH plugins... (ignoring errors)"
+echo "Git-cloning OH-MY-ZSH plugins... (ignoring errors)"
 ! git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ! git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
