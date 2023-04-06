@@ -3,16 +3,13 @@
 # ZSH SETTINGS
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="" # using starship (see below)
-plugins=(aliases copyfile docker-compose history kubectl terraform z zsh-autosuggestions zsh-syntax-highlighting) # removed `direnv docker fzf git`
+plugins=(aliases copyfile docker-compose history kubectl multipass terraform z zsh-autosuggestions zsh-syntax-highlighting) # removed `direnv docker fzf git`
 source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)" # https://starship.rs/
 
 # ALIASES
-alias cat="bat"
-alias ccat="cat"
 alias cpf="copyfile"
-alias mp="multipass"
 alias zshconfig="chezmoi edit --apply ~/.zshrc"
 
 # AUTOCOMPLETIONS
