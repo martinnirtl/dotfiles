@@ -1,14 +1,14 @@
-#! /opt/homebrew/bin/zsh
-# TODO make this work in bash
+#! /bin/bash
 
 # CHEZMOI APPLY CHECKER
 LAST_APPLY=$(date -j -r $HOME/.config/chezmoi_last-apply.txt +"%s")
 LAST_APPLY_READABLE=$(date -j -f "%s" $LAST_APPLY)
 if [ $(date -v -7d +"%s") -ge $LAST_APPLY ]; then
+  echo "Run 'chezmoi apply' (last apply: $LAST_APPLY_READABLE)? Y/n"
   while true; do
-    echo "Run 'chezmoi apply' (last apply: $LAST_APPLY_READABLE)? Y/n"; read -sk yn
+    read -sn 1 yn
     case $yn in
-      [Nn]* ) 
+      [Nn]* )
         break
         ;;
       [Yy]* )
@@ -16,7 +16,7 @@ if [ $(date -v -7d +"%s") -ge $LAST_APPLY ]; then
         break
         ;;
       * )
-        if [[ $yn == $'\n' ]]; then # TODO is there a neater way to case check for \n
+        if [ -z ${yn} ]; then
           chezmoi apply
           break
         fi
