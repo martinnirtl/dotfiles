@@ -1,10 +1,21 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
+# TODO make this a pure bash file - no templating
+
+cat << EOF
+    ____      _ __  _       ___           
+   /  _/___  (_) /_(_)___ _/ (_)___  ___  
+   / // __ \/ / __/ / __ '/ / /_  / / _ \ 
+ _/ // / / / / /_/ / /_/ / / / / /_/  __/ 
+/___/_/ /_/_/\__/_/\__,_/_/_/ /___/\___/  
+                                          
+EOF
+
 echo "Checking for Brew command..."
 if ! command -v brew &> /dev/null
 then
-  echo "Brew not installed. Did you run `init.sh` script? Exiting..."
+  echo "Brew not installed. Did you run 'setup.sh' script? Exiting..."
   exit 1
 else
   echo "Brew is installed. Attempting update..."
@@ -15,7 +26,7 @@ fi
 echo "Installing Brew formulas from Brewfile..."
 brew bundle --no-lock --file={{ joinPath .chezmoi.sourceDir "Brewfile" | quote }}
 
-# Krew can be installed before kubernetes-cli/kubectl, which gets installed during `brew bundle`
+# Krew can be installed before kubernetes-cli/kubectl, which gets installed during 'brew bundle'
 echo "Installing Krew..."
 if [ -d "$HOME/.krew" ]; # checking the default install dir
 then
@@ -39,14 +50,24 @@ kubectl-krew install < {{ joinPath .chezmoi.sourceDir "kubectl-plugins.txt" | qu
 echo "Installing OH-MY-ZSH..."
 if [ -d "$ZSH" ];
 then
-	echo "OH-MY-ZSH is installed under $ZSH. Attempting upgrade..."
-  upgrade_oh_my_zsh
+	echo "OH-MY-ZSH is installed under $ZSH. Attempting update..."
+  omz update
 else
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 echo "Git-cloning OH-MY-ZSH plugins... (ignoring errors)"
-! git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-! git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+ZSH_PLUGIN=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+if ! [ -d "$ZSH_PLUGIN" ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_PLUGIN
+else
+  echo "Skipping zsh-autosuggestions. Already installed..."
+fi
+ZSH_PLUGIN=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+if ! [ -d "$ZSH_PLUGIN" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_PLUGIN
+else
+  echo "Skipping zsh-syntax-highlighting. Already installed..."
+fi
 
 {{ end -}}
