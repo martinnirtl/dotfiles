@@ -3,6 +3,6 @@ test
 
 Brewfile
 Brewfile_old
-init.sh
+setup.sh
 kubectl-plugins.txt
 README.md
