@@ -1,12 +1,13 @@
 #!/bin/bash
 
-echo
-echo "░█▀▀░█▀█░█░░░█▀█░█▀█░█▀▀"
-echo "░█░█░█░█░█░░░█▀█░█░█░█░█"
-echo "░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀"
-echo
+cat << EOF
 
-#  TODO implement for all checkers
+░█▀▀░█▀█░█░░░█▀█░█▀█░█▀▀
+░█░█░█░█░█░░░█▀█░█░█░█░█
+░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀
+
+EOF
+
 if ! [ -z ${DISABLE_CHECKER_GOLANG} ]; then
   echo "Checker Golang: disabled"
   exit 0

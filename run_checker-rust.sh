@@ -1,10 +1,17 @@
 #!/bin/bash
 
-echo
-echo "░█▀▄░█░█░█▀▀░▀█▀"
-echo "░█▀▄░█░█░▀▀█░░█░"
-echo "░▀░▀░▀▀▀░▀▀▀░░▀░"
-echo
+cat << EOF
+
+░█▀▄░█░█░█▀▀░▀█▀
+░█▀▄░█░█░▀▀█░░█░
+░▀░▀░▀▀▀░▀▀▀░░▀░
+
+EOF
+
+if ! [ -z ${DISABLE_CHECKER_RUST} ]; then
+  echo "Checker Rust: disabled"
+  exit 0
+fi
 
 echo "Checking for rust toolchain..."
 if command -v rustc &> /dev/null; then
