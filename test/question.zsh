@@ -13,7 +13,7 @@ while true; do
       break
       ;;
     * )
-      if [[ $yn == $'\n' ]]; then # TODO is there a neater way to case check for \n
+      if [[ $yn == $'\n' ]]; then
         echo "default"
         break
       else
