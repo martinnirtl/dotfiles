@@ -3,3 +3,4 @@ krew
 kyverno
 ns
 resource-capacity
+rook-ceph
