@@ -10,7 +10,10 @@ eval "$(starship init zsh)" # https://starship.rs/
 
 # ALIASES
 alias cpf="copyfile"
+alias kztl="k0sctl"
 alias zshconfig="chezmoi edit --apply ~/.zshrc"
+alias python="python3"
+alias pip="pip3"
 
 # AUTOCOMPLETIONS
 autoload -Uz compinit; compinit
