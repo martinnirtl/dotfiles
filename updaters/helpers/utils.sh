@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 require_sudo() {
     if [[ $EUID -ne 0 ]]; then
@@ -7,7 +7,7 @@ require_sudo() {
     fi
 }
 
-prompt_to_continue() {
+prompt_to_continue_options() {
     local question="$1"
     local default_answer="$2"
     local exit_code="$3"
@@ -26,6 +26,18 @@ prompt_to_continue() {
     if [[ $answer == "n" || $answer == "N" ]]; then
         echo "$exit_message"
         exit "$exit_code"
+    fi
+}
+
+prompt_to_continue() {
+    local question="$1"
+
+    read -t 10 -n 1 -s -r -p "$question [Enter] to continue or any other key to abort"
+    echo ""  # Move to a new line for better readability
+    
+    if [[ $REPLY != "" ]]; then
+        echo "Aborted."
+        exit 0
     fi
 }
 

@@ -18,7 +18,7 @@ then
   echo "ERROR: Brew not installed"
   exit 1
 else
-  prompt_to_continue "Do you want to update Brew formulas?" "Y" 0 "No brew today."
+  prompt_to_continue "Update Brew formulas?"
   brew update
   echo
   echo "Finished brew upgrade"
