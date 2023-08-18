@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # directory holding the scripts
-SCRIPT_DIR="./updaters"
+SCRIPT_DIR="$(chezmoi source-path)/updaters"
 
 # get a list of all bash scripts in the directory
 scripts=($(ls $SCRIPT_DIR/*.sh))
