@@ -8,10 +8,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/martinnirtl/dotfiles/main/
 
 The final instruction of initialization script will run `chezmoi apply` to apply everything else defined within this repo.
 
-## Checker Scripts
+## Updater Scripts
 
-Checker scripts are there to keep the most important toolchains up2date. Currently, they run on every `chezmoi apply` and are there for aws CLI, all Brew formulas, Golang and Rust.
-After one week without `chezmoi apply`, a prompt will ask to run it in order to also run checker scripts (see `run_checker-*.sh`).
+Updater scripts are there to keep important toolchains up2date. These scripts are run after confirmation during `chezmoi apply` and are there for Brew formulas, Cilium CLI, Golang and Rust (aws CLI is currently in backlog).
+After one week without `chezmoi apply`, a prompt will ask to run it in order to also run updater scripts (see `run_updater.sh`).
 
 ## Other
 
