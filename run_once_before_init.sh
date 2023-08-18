@@ -1,7 +1,4 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-
-# TODO make this a pure bash file - no templating
 
 cat << EOF
     ____      _ __  _       ___           
@@ -12,6 +9,14 @@ cat << EOF
                                           
 EOF
 
+if ! command -v chezmoi &> /dev/null
+then
+  echo "Chezmoi not installed. Did you run 'setup.sh' script? Exiting..."
+  exit 1
+fi
+
+CHEZMOI_SOURCE=$(chezmoi source-path)
+
 echo "Checking for Brew command..."
 if ! command -v brew &> /dev/null
 then
@@ -20,11 +25,10 @@ then
 else
   echo "Brew is installed. Attempting update..."
   brew update
-fi
 
-# file hash: {{ include "Brewfile" | sha256sum }}
-echo "Installing Brew formulas from Brewfile..."
-brew bundle --no-lock --file={{ joinPath .chezmoi.sourceDir "Brewfile" | quote }}
+  echo "Installing Brew formulas from Brewfile..."
+  brew bundle --no-lock --file="$CHEZMOI_SOURCE/Brewfile"
+fi
 
 # Krew can be installed before kubernetes-cli/kubectl, which gets installed during 'brew bundle'
 echo "Installing Krew..."
@@ -45,7 +49,7 @@ else
 fi
 
 echo "Installing kubectl plugins via Krew..."
-kubectl-krew install < {{ joinPath .chezmoi.sourceDir "kubectl-plugins.txt" | quote }}
+kubectl-krew install < "$CHEZMOI_SOURCE/kubectl-plugins.txt"
 
 echo "Installing OH-MY-ZSH..."
 if [ -d "$ZSH" ];
@@ -69,5 +73,3 @@ if ! [ -d "$ZSH_PLUGIN" ]; then
 else
   echo "Skipping zsh-syntax-highlighting. Already installed..."
 fi
-
-{{ end -}}
