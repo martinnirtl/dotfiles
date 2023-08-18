@@ -1,0 +1,23 @@
+#!/bin/bash
+
+function print_help {
+  cat << EOF
+Usage: display_cert PEM_FILE
+
+Arguments:
+PEM_FILE Certificate PEM file
+
+Examples:
+display_cert cert.pem
+
+EOF
+}
+
+if [ $# -eq 0 ] || [ $# -gt 1 ]; then
+    echo "Error: Expecting exactly 1 argument!" >&2
+    echo
+    print_help
+    exit 1
+fi
+
+openssl x509 -in $1 -text

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+INT_RE='^[0-9]+$'
+
+function print_help {
+  cat << EOF
+Usage: get_cert SERVER [PORT]
+
+Arguments:
+SERVER The server\`s FQDN
+PORT   The port serving SSL/TLS. Default: 443
+
+Examples:
+get_cert google.com
+get_cert my.domain.com 8443
+get_cert 49.102.12.61 6443
+
+EOF
+}
+
+if [ $# -eq 0 ] || [ $# -gt 2 ]; then
+    echo "Error: Expecting at least 1, but not more than 2 arguments!" >&2
+    echo
+    print_help
+    exit 1
+fi
+
+if [ -z $2 ]; then
+  PORT=443
+else
+  if ! [[ $2 =~ $INT_RE ]];  then
+    echo "Error: PORT is not a number" >&2
+    echo
+    print_help
+
+    exit 1
+  fi
+  PORT=$2
+fi
+
+echo | openssl s_client -showcerts -servername $1 -connect $1:$PORT 2>/dev/null | openssl x509 -inform pem -noout -text
