@@ -18,6 +18,7 @@ EOF
 
 echo
 echo "Running 'chezmoi apply'..."
+echo
 
 # NOTE: Chezmoi apply checker checks against last_modified date of file, not the content itself
 cat << EOF > .config/chezmoi_last-apply.txt

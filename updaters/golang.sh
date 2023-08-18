@@ -10,10 +10,7 @@ cat << EOF
 
 EOF
 
-if ! [ -z ${DISABLE_CHECKER_GOLANG} ]; then
-  echo "Checker Golang: disabled"
-  exit 0
-fi
+exit_on_disabled "$0"
 
 GOROOT=$(go env GOROOT)
 # Check GOROOT - this gets changed by brew's go

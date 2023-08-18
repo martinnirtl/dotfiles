@@ -10,12 +10,9 @@ cat << EOF
 
 EOF
 
-if ! [ -z ${DISABLE_CHECKER_BREW} ]; then
-  echo "Checker Brew: disabled"
-  exit 0
-fi
+exit_on_disabled "$0"
 
-echo "Checking for brew..."
+echo "Checking for Brew binary on path..."
 if ! command -v brew &> /dev/null
 then
   echo "ERROR: Brew not installed"

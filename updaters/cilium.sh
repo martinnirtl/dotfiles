@@ -10,10 +10,7 @@ cat << EOF
 
 EOF
 
-if ! [ -z ${DISABLE_CHECKER_CILIUM} ]; then
-  echo "Checker cilium: disabled"
-  exit 0
-fi
+exit_on_disabled "$0"
 
 prompt_to_continue "Do you want to update Cilium CLI?" "Y" 0 "No Cilium update today."
 CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/master/stable.txt)

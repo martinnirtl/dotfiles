@@ -28,3 +28,18 @@ prompt_to_continue() {
         exit "$exit_code"
     fi
 }
+
+exit_on_disabled() {
+    local script_name=$(basename "$1")
+    local script_name_without_extension="${script_name%.*}"
+    local var_name=$(echo "DISABLE_UPDATER_$script_name_without_extension" | tr 'a-z' 'A-Z')
+    
+    # Retrieve the value of the environment variable
+    local value="${!var_name}"
+    
+    # Check if the value is truthy (set and not empty)
+    if [[ -n "$value" ]]; then
+        echo "Updater disabled: Variable $var_name is set to: $value"
+        exit 0
+    fi
+}

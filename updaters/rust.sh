@@ -10,10 +10,7 @@ cat << EOF
 
 EOF
 
-if ! [ -z ${DISABLE_CHECKER_RUST} ]; then
-  echo "Checker Rust: disabled"
-  exit 0
-fi
+exit_on_disabled "$0"
 
 echo "Checking for Rust toolchain..."
 if command -v rustc &> /dev/null; then
