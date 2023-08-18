@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # CHEZMOI APPLY CHECKER
 LAST_APPLY=$(date -j -r $HOME/.config/chezmoi_last-apply.txt +"%s")
