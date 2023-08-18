@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(dirname "$0")/helpers/utils.sh"
+
 cat << EOF
 
 ░█▀▄░█▀▄░█▀▀░█░█
@@ -19,7 +21,7 @@ then
   echo "ERROR: Brew not installed"
   exit 1
 else
-  echo "Found. Attempting update..."
+  prompt_to_continue "Do you want to update Brew formulas?" "Y" 0 "No brew today."
   brew update
   echo
   echo "Finished brew upgrade"

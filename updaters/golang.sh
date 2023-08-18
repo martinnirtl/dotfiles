@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(dirname "$0")/helpers/utils.sh"
+
 cat << EOF
 
 ░█▀▀░█▀█░█░░░█▀█░█▀█░█▀▀
@@ -30,22 +32,16 @@ LATEST_DOWNLOAD="https://go.dev/dl/${LATEST_PKG}"
 INSTALLED_VERSION=$(go version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
 
 if [ "$LATEST_VERSION" != "$INSTALLED_VERSION" ] || [ -z ${INSTALLED_VERSION} ]; then
-  while true; do
-      read -p "Install/Upgrade go $LATEST_VERSION? Y/n" yn # TODO read in char w/o enter
-      case $yn in
-          [Nn]* ) exit 0;;
-          * )
-            echo "Installing go: ${LATEST_PKG}" && \
-            curl -OL $LATEST_DOWNLOAD && \
-            sudo installer -pkg $LATEST_PKG -target / && \
-            rm $LATEST_PKG && \
-            echo "Golang installed." && \
-            exit 0
+  prompt_to_continue "Do you want to install/update go?" "Y" 0 "No go update today."
+  echo "Installing go: ${LATEST_PKG}" && \
+  curl -OL $LATEST_DOWNLOAD && \
+  sudo installer -pkg $LATEST_PKG -target / && \
+  rm $LATEST_PKG && \
+  echo "Golang installed." && \
+  exit 0
 
-            echo "Install failed!"
-            ;;
-      esac
-  done
+  echo "Install failed!"
+
 else
   echo "Latest go version already installed"
 fi
