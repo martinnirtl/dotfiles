@@ -35,6 +35,7 @@ echo "Installing Krew..."
 if [ -d "$HOME/.krew" ]; # checking the default install dir
 then
 	echo "Krew found under $HOME/.krew. Attempting update..."
+  kubectl-krew update
   kubectl-krew upgrade
 else
   (
