@@ -32,13 +32,14 @@ prompt_to_continue_options() {
 prompt_to_continue() {
     local question="$1"
 
-    read -t 10 -n 1 -s -r -p "$question [Enter] to continue or any other key to abort"
-    echo ""  # Move to a new line for better readability
-    
+    read -t 10 -n 1 -s -r -p "$question [Enter] to continue or any other key to cancel"
+
     if [[ $REPLY != "" ]]; then
-        echo "Aborted."
+        echo " > cancelled"
         exit 0
     fi
+
+    echo ""  # Move to a new line for better readability
 }
 
 exit_on_disabled() {
