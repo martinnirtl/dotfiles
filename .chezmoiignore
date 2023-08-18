@@ -2,7 +2,6 @@ backlog
 updaters
 
 Brewfile
-Brewfile_old
 setup.sh
 kubectl-plugins.txt
 README.md
