@@ -46,6 +46,7 @@ prompt_to_continue() {
         exit 0
     fi
 
+    echo " > go"
     echo ""  # Move to a new line for better readability
 }
 
