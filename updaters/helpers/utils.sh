@@ -42,6 +42,18 @@ prompt_to_continue() {
     echo ""  # Move to a new line for better readability
 }
 
+prompt_for_string() {
+    local question="$1"
+    local default_answer="$2"
+
+    read -p "${question} [${default_answer}]: " input
+
+    # If input is empty, use the default answer
+    [[ -z "$input" ]] && input="$default_answer"
+    
+    echo "$input"
+}
+
 exit_on_disabled() {
     local script_name=$(basename "$1")
     local script_name_without_extension="${script_name%.*}"
