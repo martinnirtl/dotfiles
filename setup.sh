@@ -6,6 +6,11 @@ echo "░▀▀█░█▀█░█▀▀░█░░░█░░░░░░�
 echo "░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░▀░▀░▀▀▀░░▀░"
 echo
 
+if [[ "$(uname)" != "Darwin" ]]; then
+    echo "This setup is for MacOS only! Exitting..."
+    exit 0
+fi
+
 DEV=$HOME/Development
 DEV_TOOLS=$DEV/tools
 DEV_TOOLS_BIN=$DEV/tools/bin
