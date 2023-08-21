@@ -14,7 +14,7 @@ node-shell
 ns
 oidc-login
 outdated
-popeye
+# popeye
 preflight
 resource-capacity
 rook-ceph
@@ -23,8 +23,8 @@ sniff
 stern
 support-bundle
 tail
-trace
+# trace
 tree
-virt
+# virt
 who-can
 whoami
