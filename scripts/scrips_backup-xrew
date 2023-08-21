@@ -9,3 +9,5 @@ brew bundle dump --force --file=$BREWFILE
 
 echo "Writing Krew file: $KREWFILE"
 kubectl-krew list > $KREWFILE
+
+echo "Don't forget to run 'chezmoi apply' to sync the files..."
