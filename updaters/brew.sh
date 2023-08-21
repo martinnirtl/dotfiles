@@ -22,6 +22,6 @@ else
   brew update
   echo
   echo "Finished brew upgrade"
-  echo "Don't forget to backup Brewfile via 'brew bundle dump'..."
+  echo "Don't forget to backup Brewfile via 'scripts_backup-xrew'"
 fi
 
