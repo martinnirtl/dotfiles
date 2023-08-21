@@ -2,7 +2,7 @@
 
 CHEZMOI_SOURCE=$(chezmoi source-path)
 BREWFILE=$CHEZMOI_SOURCE/.Brewfile
-KREWFILE=$CHEZMOI_SOURCE/dot_config/krew-plugins
+KREWFILE=$CHEZMOI_SOURCE/krew-plugins
 
 echo "Writing Brew dumpfile: $BREWFILE"
 brew bundle dump --force --file=$BREWFILE
