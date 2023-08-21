@@ -2,7 +2,5 @@ backlog
 scripts
 updaters
 
-Brewfile
 setup.sh
-kubectl-plugins.txt
 README.md
