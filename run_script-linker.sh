@@ -19,8 +19,28 @@ if [[ ! -d "$DEST_DIR" ]]; then
     exit 1
 fi
 
+verify_symlinks() {
+    local dir_path="$1"
+
+    if [[ ! -d "$dir_path" ]]; then
+        echo "The given path is not a directory!"
+        return 1
+    fi
+
+    # Find all symbolic links in the directory
+    find "$dir_path" -type l | while IFS= read -r symlink; do
+        # Check if the target of the symlink exists
+        if [[ ! -e "$symlink" ]]; then
+            echo "Removing broken symlink: $symlink"
+            rm $symlink
+        fi
+    done
+}
+
+verify_symlinks $DEST_DIR
+
 # Function to process each file from the source directory
-process_script() {
+create_symlink() {
     local script="$1"
     local script_name=$(basename "$script")
     local link_target="$DEST_DIR/$script_name"
@@ -28,10 +48,7 @@ process_script() {
     # Check if there's already a symbolic link at the destination
     if [[ -L "$link_target" ]]; then
         # If the link is broken, remove it
-        if [[ ! -e "$link_target" ]]; then
-            rm "$link_target"
-            echo "Removed broken link for $script_name"
-        else
+        if [[ -e "$link_target" ]]; then
             # If the link is valid, skip the current iteration
             echo "$script_name already has a valid link. Skipping..."
             return
@@ -47,7 +64,7 @@ process_script() {
 for script in "$SOURCE_DIR"/*; do
     # Ensure it's a file and not a directory or symlink
     if [[ -f "$script" && ! -L "$script" ]]; then
-        process_script "$script"
+        create_symlink "$script"
     fi
 done
 
