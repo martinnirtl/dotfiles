@@ -20,6 +20,7 @@ then
 else
   prompt_to_continue "Update Brew formulas?"
   brew update
+  brew upgrade
   echo
   echo "Finished brew upgrade"
   echo "Don't forget to backup Brewfile via 'scripts_backup-xrew'"
