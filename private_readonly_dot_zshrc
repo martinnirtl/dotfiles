@@ -15,13 +15,18 @@ alias kztl="k0sctl"
 alias pip="pip3"
 alias python="python3"
 
-fpath=(~/.config/completions $fpath)
+# https://formulae.brew.sh/formula/zsh-completions
+# FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+# fpath=(~/.config/completions $fpath)
 
 # AUTOCOMPLETIONS
 autoload -Uz compinit; compinit
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C $HOMEBREW_PREFIX/bin/vault vault
 complete -o nospace -C $HOMEBREW_PREFIX/bin/terraform terraform
+
+# rm -f ~/.zcompdump; compinit
 
 # 1PASSWORD PLUGINS (https://developer.1password.com/docs/cli/shell-plugins/)
 # source $HOME/.config/op/plugins.sh
