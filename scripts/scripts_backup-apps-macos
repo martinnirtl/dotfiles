@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Define paths
+SYSTEM_APPS_PATH="/Applications"
+USER_APPS_PATH="$HOME/Applications"
+
+# Function to list and format apps
+list_apps() {
+    find "$1" -name '*.app' -maxdepth 2 -type d | sed "s|.app||" | sed "s|$1/|  |"
+}
+
+# Print system apps
+echo "System Apps:"
+list_apps "$SYSTEM_APPS_PATH"
+
+# Print user apps
+echo ""
+echo "User Apps:"
+list_apps "$USER_APPS_PATH"

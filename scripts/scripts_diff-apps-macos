@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Check if the input file is provided as an argument
+if [ -z "$1" ]; then
+    echo "Error: Please provide the input file as the first argument."
+    exit 1
+fi
+
+INPUT_FILE="$1"
+
+# Check if the input file exists
+if [ ! -f "$INPUT_FILE" ]; then
+    echo "Error: Reference file '$INPUT_FILE' does not exist."
+    exit 1
+fi
+
+# Define paths
+SYSTEM_APPS_PATH="/Applications"
+USER_APPS_PATH="$HOME/Applications"
+
+# Function to list and format apps
+list_apps() {
+    find "$1" -name '*.app' -maxdepth 2 -type d | sed "s|.app||" | sed "s|$1/|  |"
+}
+
+# Generate current list of apps
+CURRENT_APPS=$(mktemp)
+{
+    echo "System Apps:"
+    list_apps "$SYSTEM_APPS_PATH"
+    echo ""
+    echo "User Apps:"
+    list_apps "$USER_APPS_PATH"
+} > "$CURRENT_APPS"
+
+# Compare the current list with the input list and annotate the diff output
+DIFF_OUTPUT=$(diff "$INPUT_FILE" "$CURRENT_APPS")
+
+# If diff has a non-zero exit status, there were differences
+if [ $? -eq 0 ]; then
+    echo "No differences found."
+else
+    echo "$DIFF_OUTPUT" | awk '
+        /^</ { print "missing ", $0 }
+        /^>/ { print "new     ", $0 }
+    '
+fi
+# Clean up
+rm "$CURRENT_APPS"
