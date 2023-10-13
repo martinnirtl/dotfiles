@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Parse options
+input_path="."
+
+while getopts ":i:" opt; do
+    case $opt in
+        i)
+            input_path="$OPTARG"
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
+
+# Check if the provided path is a directory or file
+if [ -d "$input_path" ]; then
+    # Assume the backup file is in the provided directory
+    backup_file="$(ls ${input_path}/*_backup.txt | head -n 1)"
+elif [ -f "$input_path" ]; then
+    backup_file="$input_path"
+else
+    echo "Error: $input_path is neither a valid file nor directory."
+    exit 1
+fi
+
+if [ ! -f "$backup_file" ]; then
+    echo "Error: Could not find the backup metadata file."
+    exit 1
+fi
+
+while IFS= read -r line; do
+    # Skip empty lines
+    [ -z "$line" ] && continue
+
+    tar_file="${line%% *}"
+    rel_path="${line##* }"
+    abs_path="${rel_path/\~/$HOME}"
+
+    # Verify that both archive and path are present
+    if [ -z "$tar_file" ] || [ -z "$rel_path" ] || [ "$tar_file" == "$rel_path" ]; then
+        echo "Warning: Skipping malformed line: '$line'"
+        continue
+    fi
+
+    if [ -e "$abs_path" ]; then
+        echo "Path $abs_path already exists. Skipping..."
+    else
+        # Create parent directory if it doesn't exist
+        mkdir -p "$(dirname "$abs_path")"
+        tar -xzf "$(dirname "$backup_file")/$tar_file" -C "$(dirname "$abs_path")"
+        echo "Restored $tar_file to $abs_path"
+    fi
+done < "$backup_file"

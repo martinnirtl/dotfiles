@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# Function to get the absolute path
+get_abs_path() {
+    echo "$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+}
+
+# Get the current date in YYYYMMDD-HHMM format
+# Get the current date in YYYYMMDD-HHMM format
+timestamp=$(date "+%Y%m%d_%H%M")
+
+
+# Default destination is current date followed by _backup
+dest="${timestamp}_backup"
+
+# Parse options
+while getopts ":d:" opt; do
+    case $opt in
+        d)
+            dest="$OPTARG"
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
+
+# Remove options from positional parameters
+shift $((OPTIND - 1))
+
+# Check if any arguments are provided after options
+if [ "$#" -eq 0 ]; then
+    echo "Usage: $0 [-d destination] /path/to/dir_or_file1 /path/to/dir_or_file2 ..."
+    exit 1
+fi
+
+# Backup metadata filename
+backup_file="${timestamp}_backup.txt"
+
+# Check if the metadata file already exists in the destination directory
+if [ -f "${dest}/${backup_file}" ]; then
+    echo "Error: ${backup_file} already exists in the destination directory ${dest}. Aborting."
+    exit 1
+fi
+
+# Create destination directory if it doesn't exist
+if [ ! -d "$dest" ]; then
+    mkdir -p "$dest"
+fi
+
+# Initialize the backup file content
+backup_content=""
+
+# Iterate over each argument
+for item in "$@"; do
+    abs_item=$(get_abs_path "$item")
+    
+    # Make path relative to the user's home directory
+    rel_path="${abs_item/$HOME/~}"
+    
+    # Extract the last part of the path to name the tar file
+    base_name=$(basename "$abs_item")
+    tar_file="${base_name}.tar.gz"
+    
+    # Archive the directory or file
+    tar -czf "${dest}/${tar_file}" -C "$(dirname "$abs_item")" "$base_name"
+
+    # Add the archive information to backup content
+    backup_content+="${tar_file} ${rel_path}\n"
+
+    # Inform the user
+    echo "Archived ${base_name} (rel: ${rep_path}) to ${tar_file}"
+done
+
+# Write the backup content to the metadata file in the destination directory
+echo -e "$backup_content" > "${dest}/${backup_file}"
+
+# Inform the user
+echo "Backup metadata saved to ${dest}/${backup_file}"
