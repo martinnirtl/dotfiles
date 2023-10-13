@@ -71,10 +71,10 @@ for item in "$@"; do
     tar -czf "${dest}/${tar_file}" -C "$(dirname "$abs_item")" "$base_name"
 
     # Add the archive information to backup content
-    backup_content+="${tar_file} ${rel_path}\n"
+    backup_content+="${tar_file}:${rel_path}\n"
 
     # Inform the user
-    echo "Archived ${base_name} (rel: ${rep_path}) to ${tar_file}"
+    echo "Archived ${base_name} (rel: ${rel_path}) to ${tar_file}"
 done
 
 # Write the backup content to the metadata file in the destination directory

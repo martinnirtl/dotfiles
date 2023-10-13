@@ -35,12 +35,12 @@ if [ ! -f "$backup_file" ]; then
     exit 1
 fi
 
+# Restore from the backup file
 while IFS= read -r line; do
     # Skip empty lines
     [ -z "$line" ] && continue
 
-    tar_file="${line%% *}"
-    rel_path="${line##* }"
+    IFS=":" read -r tar_file rel_path <<< "$line"
     abs_path="${rel_path/\~/$HOME}"
 
     # Verify that both archive and path are present
