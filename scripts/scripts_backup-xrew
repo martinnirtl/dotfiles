@@ -4,8 +4,8 @@ CHEZMOI_SOURCE=$(chezmoi source-path)
 BREWFILE=$CHEZMOI_SOURCE/.Brewfile
 KREWFILE=$CHEZMOI_SOURCE/dot_config/krew-plugins
 
-echo "Writing Brew dumpfile: $BREWFILE"
-brew bundle dump --force --file=$BREWFILE
+echo "Writing Brew dumpfile (brews, casks, taps; no vscode plugins): $BREWFILE"
+brew bundle dump --brews --casks --taps --force --file=$BREWFILE
 
 echo "Writing Krew file: $KREWFILE"
 kubectl-krew list > $KREWFILE
