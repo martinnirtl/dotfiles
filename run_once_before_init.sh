@@ -17,6 +17,11 @@ fi
 
 CHEZMOI_SOURCE=$(chezmoi source-path)
 
+echo "Changing git remote of chezmoi from https to ssh..."
+cd $CHEZMOI_SOURCE
+git remote set-url git remote set-url origin git@github.com:martinnirtl/dotfiles.git
+cd -
+
 echo "Checking for Brew command..."
 if ! command -v brew &> /dev/null
 then
@@ -75,11 +80,11 @@ else
   echo "Skipping zsh-syntax-highlighting. Already installed..."
 fi
 
-# TODO add to ~/.ssh/config
+# TODO 1Password integration
+# add to ~/.ssh/config
 # Host *
 # 	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-# TODO change remote url of chezmoi git to be ssh based
-# git remote set-url origin git@github.com/martinnirtl/dotfiles.git
+# TODO iterm2 config?
 
 cat << EOF
     ____                 __   ________    _      __
