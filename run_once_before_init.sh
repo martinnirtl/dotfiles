@@ -19,7 +19,7 @@ CHEZMOI_SOURCE=$(chezmoi source-path)
 
 echo "Changing git remote of chezmoi from https to ssh..."
 cd $CHEZMOI_SOURCE
-git remote set-url git remote set-url origin git@github.com:martinnirtl/dotfiles.git
+git remote set-url origin git@github.com:martinnirtl/dotfiles.git
 cd -
 
 echo "Checking for Brew command..."
@@ -98,3 +98,4 @@ EOF
 echo "After iTerm2 installation:"
 echo "> Configure dynamic profiles folder to be loaded from $HOME/.config/iterm2/DynamicProfiles (see Settings > Advanced > Section General > Path to folder with dynamic profiles)"
 echo "> Set default profile in iterm2 (see Settings > Profiles)"
+echo
