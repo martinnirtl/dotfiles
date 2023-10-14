@@ -54,4 +54,4 @@ fi
 
 echo "Initializing and applying chezmoi over SSH..."
 # chezmoi init martinnirtl/dotfiles --apply --source $DEV/chezmoi --ssh # wait for https://github.com/twpayne/chezmoi/issues/2771
-chezmoi init martinnirtl/dotfiles --apply --ssh
+chezmoi init github.com/martinnirtl/dotfiles --branch main --apply --ssh
