@@ -22,8 +22,8 @@ if [[ -z "$COMPLETIONS" ]]; then
 fi
 
 if [ ! -d "$COMPLETIONS" ]; then
-	echo "Directory does not exist. Exitting..."
-      exit 1
+	echo "Directory does not exist. Creating ${COMPLETIONS}"
+    mkdir -p $COMPLETIONS
 fi
 
 while IFS= read -r binary_name; do
