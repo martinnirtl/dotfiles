@@ -27,7 +27,7 @@ else
   brew update
 
   echo "Installing Brew formulas from Brewfile..."
-  brew bundle --no-lock --file="$CHEZMOI_SOURCE/Brewfile"
+  brew bundle --no-lock --file="$CHEZMOI_SOURCE/private_readonly_dot_Brewfile"
 fi
 
 # Krew can be installed before kubernetes-cli/kubectl, which gets installed during 'brew bundle'

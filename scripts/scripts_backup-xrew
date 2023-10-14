@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CHEZMOI_SOURCE=$(chezmoi source-path)
-BREWFILE=$CHEZMOI_SOURCE/.Brewfile
+BREWFILE=$CHEZMOI_SOURCE/private_readonly_dot_Brewfile
 KREWFILE=$CHEZMOI_SOURCE/dot_config/krew-plugins
 
 echo "Writing Brew dumpfile (brews, casks, taps; no vscode plugins): $BREWFILE"
