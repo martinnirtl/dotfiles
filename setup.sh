@@ -11,16 +11,16 @@ if [[ "$(uname)" != "Darwin" ]]; then
     exit 0
 fi
 
-DEV=$HOME/Development
-DEV_TOOLS=$DEV/tools
-DEV_TOOLS_BIN=$DEV/tools/bin
+DEV_TOOLS=$HOME/Development/tools
 
 echo "Creating Development (and tools) folder under $HOME..."
-if [ -d "$DEV_TOOLS_BIN" ];
+if [ -d "$DEV_TOOLS" ];
 then
 	echo "Directory already exists."
 else
-  mkdir -p $DEV_TOOLS_BIN
+  mkdir -p $DEV_TOOLS
+  mkdir $DEV_TOOLS/bin
+  mkdir $DEV_TOOLS/go
 fi
 
 echo "Checking for prerequisites..."

@@ -9,9 +9,8 @@ fi
 export COMPLETIONS="$HOME/.config/completions"
 
 export AWS_DEFAULT_PROFILE=default
-export DEV=$HOME/Development
-export DEV_TOOLS=$DEV/tools
 export BAT_THEME="Monokai Extended" # run `bat --list-themes` to get preview on themes
+export DEV_TOOLS=$HOME/Development/tools
 #export DOCKER_HOST="unix://$HOMEe/.local/share/containers/podman/machine/podman-machine-default/podman.sock"
 #export FZF_BASE="$HOMEBREW_PREFIX/bin/fzf"
 export GOPATH="$DEV_TOOLS/go"
