@@ -1,0 +1,44 @@
+#!/bin/bash
+
+function print_help {
+  cat << EOF
+Usage: scripts_cert-display-kube USER
+
+Arguments:
+USER Username in Kubeconfig
+
+Examples:
+scripts_cert-display-kube admin
+
+KUBECONFIG=kubeconfig.yaml scripts_cert-display-kube admin
+
+EOF
+}
+
+USERNAME=$1
+
+# Check if KUBECONFIG is set
+if [ -z "$KUBECONFIG" ]; then
+    KUBECONFIG="$HOME/.kube/config"
+fi
+
+# Save the original IFS value
+OLD_IFS=$IFS
+
+# Set IFS to colon for splitting
+IFS=':'
+
+# Iterate over each path in KUBECONFIG
+for path in $KUBECONFIG; do
+  echo "Printing certificates for user $USERNAME of config $path: "
+  if [ ! -f "${path}" ]; then
+    echo "Error: No such file ${path}. Skipping..."
+    echo
+    continue
+  fi
+  cat $path | yq ".users[] | select(.name == \"$USERNAME\") | .user.client-certificate-data" | base64 -d | openssl x509 -text
+  echo
+done
+
+# Restore the original IFS value
+IFS=$OLD_IFS
