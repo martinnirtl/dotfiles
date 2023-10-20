@@ -8,7 +8,8 @@ fi
 # CUSTOM VARIABLES
 export COMPLETIONS="$HOME/.config/completions"
 
-export AWS_DEFAULT_PROFILE=default
+export AWS_PROFILE=default
+export AWS_DEFAULT_REGION=eu-central-1
 export BAT_THEME="Monokai Extended" # run `bat --list-themes` to get preview on themes
 export DEV_TOOLS=$HOME/Development/tools
 #export DOCKER_HOST="unix://$HOMEe/.local/share/containers/podman/machine/podman-machine-default/podman.sock"
