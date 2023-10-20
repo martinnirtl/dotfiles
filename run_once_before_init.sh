@@ -55,7 +55,7 @@ else
 fi
 
 echo "Installing kubectl plugins via Krew..."
-kubectl-krew install < "$CHEZMOI_SOURCE/kubectl-plugins.txt"
+cat "$CHEZMOI_SOURCE/dot_config/private_readonly_kubectl-plugins.txt" | grep -v '^#' | kubectl krew install
 
 echo "Installing OH-MY-ZSH..."
 if [ -d "$ZSH" ];
@@ -86,6 +86,7 @@ fi
 # 	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 # TODO iterm2 config?
 
+echo
 cat << EOF
     ____                 __   ________    _      __
    / __ \___  ____ _____/ /  /_  __/ /_  (_)____/ /
@@ -93,9 +94,11 @@ cat << EOF
  / _, _/  __/ /_/ / /_/ /    / / / / / / (__  )_/  
 /_/ |_|\___/\__,_/\__,_/    /_/ /_/ /_/_/____(_)   
 
-EOF                                                   
+EOF
 
 echo "After iTerm2 installation:"
 echo "> Configure dynamic profiles folder to be loaded from $HOME/.config/iterm2/DynamicProfiles (see Settings > Advanced > Section General > Path to folder with dynamic profiles)"
 echo "> Set default profile in iterm2 (see Settings > Profiles)"
+echo
+echo "---"
 echo
