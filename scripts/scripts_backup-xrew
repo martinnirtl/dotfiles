@@ -2,7 +2,7 @@
 
 CHEZMOI_SOURCE=$(chezmoi source-path)
 BREWFILE=$CHEZMOI_SOURCE/private_readonly_dot_Brewfile
-KREWFILE=$CHEZMOI_SOURCE/dot_config/krew-plugins
+KREWFILE=$CHEZMOI_SOURCE/dot_config/private_readonly_kubectl-plugins.txt
 
 echo "Writing Brew dumpfile (brews, casks, taps; no vscode plugins): $BREWFILE"
 brew bundle dump --brews --casks --taps --force --file=$BREWFILE
