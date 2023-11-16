@@ -32,7 +32,7 @@ else
   brew update
 
   echo "Installing Brew formulas from Brewfile..."
-  brew bundle --no-lock --file="$CHEZMOI_SOURCE/private_readonly_dot_Brewfile"
+  brew bundle --no-lock --file=".Brewfile"
 fi
 
 # Krew can be installed before kubernetes-cli/kubectl, which gets installed during 'brew bundle'
@@ -55,7 +55,8 @@ else
 fi
 
 echo "Installing kubectl plugins via Krew..."
-cat "$CHEZMOI_SOURCE/dot_config/private_readonly_kubectl-plugins.txt" | grep -v '^#' | kubectl krew install
+source .zshenv
+cat ".config/kubectl-plugins.txt" | grep -v '^#' | kubectl-krew install
 
 echo "Installing OH-MY-ZSH..."
 if [ -d "$ZSH" ];
