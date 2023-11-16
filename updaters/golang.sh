@@ -29,7 +29,7 @@ LATEST_DOWNLOAD="https://go.dev/dl/${LATEST_PKG}"
 
 INSTALLED_VERSION=$(go version | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
 
-if [ "$LATEST_VERSION" != "$INSTALLED_VERSION" ] || [ -z ${INSTALLED_VERSION} ]; then
+if [ "$LATEST_VERSION" != "$INSTALLED_VERSION" ] || [ -z ${INSTALLED_VERSION} ] || [[ $(which go) == *"/homebrew/"* ]]; then
   echo "Installing go: ${LATEST_PKG}" && \
   curl -OL $LATEST_DOWNLOAD && \
   sudo installer -pkg $LATEST_PKG -target / && \
