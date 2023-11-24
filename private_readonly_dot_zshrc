@@ -28,8 +28,8 @@ complete -o nospace -C $HOMEBREW_PREFIX/bin/terraform terraform
 
 # rm -f ~/.zcompdump; compinit
 
-# 1PASSWORD PLUGINS (https://developer.1password.com/docs/cli/shell-plugins/)
-# source $HOME/.config/op/plugins.sh
+# COLLECTION OF TO-BE-SOURCED
+source $HOME/.config/source.sh
 
 # CHEZMOI APPLY
 source $HOME/.config/chezmoi-apply.sh
