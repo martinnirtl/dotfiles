@@ -14,6 +14,7 @@ export BAT_THEME="Monokai Extended" # run `bat --list-themes` to get preview on 
 export DEV_TOOLS=$HOME/Development/tools
 #export DOCKER_HOST="unix://$HOMEe/.local/share/containers/podman/machine/podman-machine-default/podman.sock"
 #export FZF_BASE="$HOMEBREW_PREFIX/bin/fzf"
+export GCLOUD_INSTALL="$DEV_TOOLS/google-cloud-sdk"
 export GOPATH="$DEV_TOOLS/go"
 export VOLTA_HOME="$HOME/.volta"
 
