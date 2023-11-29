@@ -3,6 +3,9 @@ right_format = """$kubernetes"""
 [aws]
 disabled = true
 
+[gcloud]
+disabled = true
+
 [golang]
 symbol = 'GO '
 
