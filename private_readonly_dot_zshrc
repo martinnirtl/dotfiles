@@ -2,11 +2,30 @@
 
 # ZSH SETTINGS
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="" # using starship (see below)
+ZSH_THEME="" # using starship (see bottom)
 plugins=(aliases copyfile docker-compose history kubectl multipass terraform z zsh-autosuggestions zsh-syntax-highlighting) # removed `direnv docker fzf git`
-source $ZSH/oh-my-zsh.sh
 
-eval "$(starship init zsh)" # https://starship.rs/
+# CHEZMOI APPLY
+source $HOME/.config/chezmoi-apply.sh
+
+# SHELL COMPLETION - https://docs.brew.sh/Shell-Completion
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+FPATH="${HOME}/.config/completions:${FPATH}" # fpath=(~/.config/completions $fpath)
+
+# added by `vault -autocomplete-install` & `terraform -install-autocomplete`
+autoload -Uz compinit bashcompinit # https://stackoverflow.com/questions/67136714/how-to-properly-install-new-completions-in-zsh
+compinit 
+bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+complete -o nospace -C /opt/homebrew/bin/vault vault
+
+# rm -f ~/.zcompdump; compinit # NOTE compinit shall only be called once per session - https://docs.brew.sh/Shell-Completion
+
+# COLLECTION OF TO-BE-SOURCED
+source $HOME/.config/source.sh
+
+# OH MY ZSH
+source $ZSH/oh-my-zsh.sh
 
 # ALIASES
 alias cpf="copyfile"
@@ -14,22 +33,7 @@ alias chezcode="code $(chezmoi source-path)"
 alias kztl="k0sctl"
 alias pip="pip3"
 alias python="python3"
+alias tmpshell="kubectl run tmp-shell --rm -i --tty --image nicolaka/netshoot"
 
-# https://formulae.brew.sh/formula/zsh-completions
-# FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-# fpath=(~/.config/completions $fpath)
-
-# AUTOCOMPLETIONS
-autoload -Uz compinit; compinit
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $HOMEBREW_PREFIX/bin/vault vault
-complete -o nospace -C $HOMEBREW_PREFIX/bin/terraform terraform
-
-# rm -f ~/.zcompdump; compinit
-
-# COLLECTION OF TO-BE-SOURCED
-source $HOME/.config/source.sh
-
-# CHEZMOI APPLY
-source $HOME/.config/chezmoi-apply.sh
+# STARSHIP - https://starship.rs/guide/#step-2-set-up-your-shell-to-use-starship
+eval "$(starship init zsh)"
