@@ -14,7 +14,7 @@ exit_on_disabled "$0"
 
 prompt_to_continue "Update custom completions?"
 
-CUSTOM_COMPLETIONS="$(chezmoi source-path)/dot_config/custom_completions"
+CUSTOM_COMPLETIONS="$CHEZMOI_SOURCE_DIR/dot_config/custom_completions"
 
 if [[ -z "$COMPLETIONS" ]]; then
     echo "COMPLETIONS variable not set. Exitting..."

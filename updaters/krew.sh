@@ -1,7 +1,6 @@
 #!/bin/bash
 
-CHEZMOI_SOURCE=$(chezmoi source-path)
-source "$CHEZMOI_SOURCE/updaters/helpers/utils.sh"
+source "$(dirname "$0")/helpers/utils.sh"
 
 cat << EOF
 

@@ -3,7 +3,7 @@
 echo "Linking scripts..."
 
 # Source directory holding the scripts
-SOURCE_DIR="$(chezmoi source-path)/scripts"
+SOURCE_DIR="$CHEZMOI_SOURCE_DIR/scripts"
 
 # Destination directory for the symbolic links
 DEST_DIR="$DEV_TOOLS/bin"
