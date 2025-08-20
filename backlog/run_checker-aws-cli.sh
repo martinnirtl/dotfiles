@@ -18,12 +18,12 @@ echo "Installing AWS CLI... (see https://docs.aws.amazon.com/cli/latest/userguid
 curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o AWSCLIV2.pkg
 
 sudo installer -pkg AWSCLIV2.pkg \
-            -target {{ joinPath .chezmoi.homeDir .devToolsRelativePath }} \
+            -target {{ joinPath .chezmoi.homeDir .devTools.relativePath }} \
             -applyChoiceChangesXML {{ joinPath .chezmoi.homeDir ".config" }}/aws.xml
 
 echo "Linking bins..."
-sudo ln -s {{ joinPath .chezmoi.homeDir .devToolsRelativePath }}/aws-cli/aws /usr/local/bin/aws
-sudo ln -s {{ joinPath .chezmoi.homeDir .devToolsRelativePath }}/aws-cli/aws_completer /usr/local/bin/aws_completer
+sudo ln -s {{ joinPath .chezmoi.homeDir .devTools.relativePath }}/aws-cli/aws /usr/local/bin/aws
+sudo ln -s {{ joinPath .chezmoi.homeDir .devTools.relativePath }}/aws-cli/aws_completer /usr/local/bin/aws_completer
 
 echo "Cleaning up..."
 rm AWSCLIV2.pkg
