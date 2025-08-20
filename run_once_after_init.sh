@@ -15,13 +15,6 @@ then
   exit 1
 fi
 
-CHEZMOI_SOURCE=$(chezmoi source-path)
-
-echo "Changing git remote of chezmoi from https to ssh..."
-cd $CHEZMOI_SOURCE
-git remote set-url origin git@github.com:martinnirtl/dotfiles.git
-cd -
-
 echo "Checking for Brew command..."
 if ! command -v brew &> /dev/null
 then

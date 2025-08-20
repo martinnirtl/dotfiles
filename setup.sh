@@ -52,6 +52,5 @@ else
   brew upgrade chezmoi
 fi
 
-echo "Initializing and applying chezmoi over SSH..."
-# chezmoi init martinnirtl/dotfiles --apply --source $DEV/chezmoi --ssh # wait for https://github.com/twpayne/chezmoi/issues/2771
-chezmoi init github.com/martinnirtl/dotfiles --branch main --apply
+echo "Initializing chezmoi with subsequent apply..."
+chezmoi init github.com/martinnirtl/dotfiles --ssh --branch main --apply
