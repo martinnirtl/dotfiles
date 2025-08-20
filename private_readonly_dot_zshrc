@@ -8,16 +8,15 @@ plugins=(aliases copyfile history kubectl multipass terraform z zsh-autosuggesti
 # CHEZMOI APPLY
 source $HOME/.config/chezmoi-apply.sh
 
-# SHELL COMPLETION - https://docs.brew.sh/Shell-Completion
+# SHELL COMPLETION part 1 - https://docs.brew.sh/Shell-Completion
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 FPATH="${HOME}/.config/completions:${FPATH}" # fpath=(~/.config/completions $fpath)
 
 # added by `vault -autocomplete-install` & `terraform -install-autocomplete`
-autoload -Uz compinit bashcompinit # https://stackoverflow.com/questions/67136714/how-to-properly-install-new-completions-in-zsh
-compinit 
-bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
-complete -o nospace -C /opt/homebrew/bin/vault vault
+# autolad and compinit commented as it gets called by oh-my-zsh.sh
+# autoload -Uz compinit bashcompinit # https://stackoverflow.com/questions/67136714/how-to-properly-install-new-completions-in-zsh
+# compinit 
+# bashcompinit
 
 # rm -f ~/.zcompdump; compinit # NOTE compinit shall only be called once per session - https://docs.brew.sh/Shell-Completion
 
@@ -26,6 +25,11 @@ source $HOME/.config/source.sh
 
 # OH MY ZSH
 source $ZSH/oh-my-zsh.sh
+
+# SHELL COMPLETION part 2 - after compinit call by oh-my-zsh.sh
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+complete -o nospace -C /opt/homebrew/bin/vault vault
+source $(brew --prefix)/etc/bash_completion.d/az
 
 # ALIASES
 alias cpf="copyfile"

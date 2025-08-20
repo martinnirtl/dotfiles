@@ -16,6 +16,10 @@ export DEV_TOOLS=$HOME/Development/tools
 #export FZF_BASE="$HOMEBREW_PREFIX/bin/fzf"
 export GCLOUD_INSTALL="$DEV_TOOLS/google-cloud-sdk"
 export GOPATH="$DEV_TOOLS/go"
+# https://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl
+export LANG=en_US.UTF-8
+# export LC_CTYPE=en_US.UTF-8
+# export LC_ALL=en_US.UTF-8
 export VOLTA_HOME="$HOME/.volta"
 
 # PATH EXTENSIONS
