@@ -1,0 +1,5 @@
+diff:
+    exclude: ["scripts"]
+
+scriptEnv:
+    MY_VAR: "test_value"
