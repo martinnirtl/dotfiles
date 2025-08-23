@@ -1,6 +1,7 @@
 backlog
 scripts
 updaters
+utils
 
 setup.sh
 README.md
