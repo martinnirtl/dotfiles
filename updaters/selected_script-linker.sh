@@ -1,6 +1,11 @@
 #!/bin/bash
 
-echo "Linking scripts..."
+lolcat << EOF
+░█▀▀░█▀▀░█▀▄░▀█▀░█▀█░▀█▀░░░█░░░▀█▀░█▀█░█░█░█▀▀░█▀▄
+░▀▀█░█░░░█▀▄░░█░░█▀▀░░█░░░░█░░░░█░░█░█░█▀▄░█▀▀░█▀▄
+░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░░░░▀░░░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀░▀░▀
+
+EOF
 
 # Source directory holding the scripts
 SOURCE_DIR="$CHEZMOI_SOURCE_DIR/scripts"
