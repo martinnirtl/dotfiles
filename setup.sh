@@ -43,14 +43,8 @@ else
   echo "Brew is already installed. Skipping..."
 fi
 
-echo "Installing chezmoi..."
-if ! command -v chezmoi &> /dev/null
-then
-  brew install chezmoi
-else
-  echo "Chezmoi already installed. Attempting upgrade..."
-  brew upgrade chezmoi
-fi
+echo "Installing chezmoi and utils..."
+brew install chezmoi bash gum lolcat
 
 echo "Initializing chezmoi with subsequent apply..."
 chezmoi init github.com/martinnirtl/dotfiles --ssh --branch main --apply
