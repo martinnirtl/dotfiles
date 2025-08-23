@@ -2,7 +2,7 @@
 
 source "$(dirname "$0")/helpers/utils.sh"
 
-cat << EOF
+lolcat << EOF
 
 ░█▀▄░█░█░█▀▀░▀█▀
 ░█▀▄░█░█░▀▀█░░█░
@@ -10,12 +10,9 @@ cat << EOF
 
 EOF
 
-exit_on_disabled "$0"
-
 echo "Checking for Rust toolchain..."
 if command -v rustc &> /dev/null; then
   echo "Rust already installed."
-  prompt_to_continue "Update Rust?"
   rustup update
   echo "Rust update done!"
   exit 0

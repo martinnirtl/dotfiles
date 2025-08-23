@@ -2,15 +2,13 @@
 
 source "$(dirname "$0")/helpers/utils.sh"
 
-cat << EOF
+lolcat << EOF
 
 ░█▀▀░█▀█░█░░░█▀█░█▀█░█▀▀
 ░█░█░█░█░█░░░█▀█░█░█░█░█
 ░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀
 
 EOF
-
-exit_on_disabled "$0"
 
 GOROOT=$(go env GOROOT)
 # Check GOROOT - this gets changed by brew's go
@@ -21,7 +19,6 @@ else
 fi
 echo
 
-prompt_to_continue "Install/update go?"
 echo "Checking latest stable go version"
 LATEST_PKG=$(curl -s https://go.dev/dl/?mode=json | grep -o 'go.*.darwin-arm64.pkg' | head -n 1 | tr -d '\r\n')
 LATEST_VERSION=$(echo $LATEST_PKG | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')

@@ -2,7 +2,7 @@
 
 source "$(dirname "$0")/helpers/utils.sh"
 
-cat << EOF
+lolcat << EOF
 
 ░█▀▀░▀█▀░█░░░▀█▀░█░█░█▄█
 ░█░░░░█░░█░░░░█░░█░█░█░█
@@ -10,9 +10,6 @@ cat << EOF
 
 EOF
 
-exit_on_disabled "$0"
-
-prompt_to_continue "Install/update Cilium CLI?"
 STABLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
 if command -v cilium &> /dev/null; then
   INSTALLED_VERSION=$(cilium version | head -1 | grep -Eo 'v[0-9]+\.[0-9]+\.[0-9]+')

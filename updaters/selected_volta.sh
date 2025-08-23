@@ -2,7 +2,7 @@
 
 source "$(dirname "$0")/helpers/utils.sh"
 
-cat << EOF
+lolcat << EOF
 
 ░█░█░█▀█░█░░░▀█▀░█▀█
 ░▀▄▀░█░█░█░░░░█░░█▀█
@@ -10,9 +10,6 @@ cat << EOF
 
 EOF
 
-exit_on_disabled "$0"
-
-prompt_to_continue "Install/update volta?"
 echo "Running volta installation..."
 echo
 

@@ -2,17 +2,13 @@
 
 source "$(dirname "$0")/helpers/utils.sh"
 
-cat << EOF
+lolcat << EOF
 
 ░█▀▀░█▀█░█▄█░█▀█░█░░░█▀▀░▀█▀░▀█▀░█▀█░█▀█░█▀▀
 ░█░░░█░█░█░█░█▀▀░█░░░█▀▀░░█░░░█░░█░█░█░█░▀▀█
 ░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀
 
 EOF
-
-exit_on_disabled "$0"
-
-prompt_to_continue "Update custom completions?"
 
 CUSTOM_COMPLETIONS="$CHEZMOI_SOURCE_DIR/dot_config/custom_completions"
 
