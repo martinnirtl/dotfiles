@@ -1,0 +1,18 @@
+CYAN='\033[38;5;51m'    # Bright cyan (xterm 51)
+GREY='\033[38;5;242m'   # Medium grey (xterm 242)
+WHITE='\033[38;5;15m'   # Pure white (xterm 15)
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'            # Reset to default color
+
+BOLD='\033[1m'
+UNDERLINE='\033[4m'
+
+log() {
+  local color_name="$1"
+  shift
+  local color_var="${color_name^^}"
+  local color_code="${!color_var:-$NC}"
+  printf "%b%s%b\n" "$color_code" "$*" "$NC"
+}
